@@ -1,0 +1,221 @@
+# MkDocs configuration for Genesis CLI
+# DOCTRINA: Solo documentación de interfaz de usuario
+
+site_name: Genesis CLI
+site_description: Interfaz de línea de comandos elegante para Genesis Engine
+site_author: Genesis Engine Team
+site_url: https://docs.genesis-engine.dev/cli
+
+# Repository
+repo_name: genesis-engine/genesis-cli
+repo_url: https://github.com/genesis-engine/genesis-cli
+edit_uri: edit/main/docs/
+
+# Copyright
+copyright: Copyright &copy; 2024 Genesis Engine Team
+
+# Configuration
+theme:
+  name: material
+  custom_dir: docs/overrides
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.tabs.link
+    - content.tooltips
+    - header.autohide
+    - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    - toc.integrate
+  palette:
+    - scheme: default
+      primary: cyan
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: cyan
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.ico
+  logo: assets/logo.svg
+  icon:
+    logo: logo
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            show_source: true
+            show_root_heading: true
+            show_root_full_path: true
+            show_root_members_full_path: true
+            show_object_full_path: false
+            show_category_heading: true
+            show_bases: true
+            show_inheritance_diagram: true
+            group_by_category: true
+            heading_level: 2
+  - click:
+      commands:
+        - genesis_cli.main:app
+  - git-revision-date-localized:
+      type: date
+      fallback_to_build_date: true
+  - minify:
+      minify_html: true
+  - macros:
+      include_dir: docs/includes
+
+# Customization
+extra:
+  analytics:
+    provider: google
+    property: G-XXXXXXXXXX
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/genesis-engine/genesis-cli
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/genesis_engine
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/company/genesis-engine
+  generator: false
+  version:
+    provider: mike
+    default: stable
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:materialx.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: genesis-engine
+      repo: genesis-cli
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+# Navigation
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quick-start.md
+    - Configuration: getting-started/configuration.md
+  - User Guide:
+    - Commands:
+      - Overview: user-guide/commands/index.md
+      - init: user-guide/commands/init.md
+      - deploy: user-guide/commands/deploy.md
+      - generate: user-guide/commands/generate.md
+      - status: user-guide/commands/status.md
+      - doctor: user-guide/commands/doctor.md
+    - Templates:
+      - Overview: user-guide/templates/index.md
+      - SaaS Basic: user-guide/templates/saas-basic.md
+      - API Only: user-guide/templates/api-only.md
+      - Frontend Only: user-guide/templates/frontend-only.md
+      - Microservices: user-guide/templates/microservices.md
+      - E-commerce: user-guide/templates/e-commerce.md
+      - Blog: user-guide/templates/blog.md
+      - AI Ready: user-guide/templates/ai-ready.md
+      - Minimal: user-guide/templates/minimal.md
+    - Configuration:
+      - Overview: user-guide/configuration/index.md
+      - Config File: user-guide/configuration/config-file.md
+      - Environment Variables: user-guide/configuration/environment-variables.md
+      - CLI Options: user-guide/configuration/cli-options.md
+    - Validation:
+      - Overview: user-guide/validation/index.md
+      - Project Names: user-guide/validation/project-names.md
+      - Templates: user-guide/validation/templates.md
+      - Features: user-guide/validation/features.md
+  - Examples:
+    - Basic Usage: examples/basic-usage.md
+    - Advanced Usage: examples/advanced-usage.md
+    - Integration: examples/integration.md
+    - Troubleshooting: examples/troubleshooting.md
+  - API Reference:
+    - Overview: api-reference/index.md
+    - CLI Module: api-reference/cli.md
+    - Commands: api-reference/commands.md
+    - Validators: api-reference/validators.md
+    - Configuration: api-reference/configuration.md
+    - Exceptions: api-reference/exceptions.md
+    - Utilities: api-reference/utilities.md
+  - Development:
+    - Contributing: development/contributing.md
+    - Architecture: development/architecture.md
+    - Testing: development/testing.md
+    - Debugging: development/debugging.md
+    - Release Process: development/release-process.md
+  - Changelog: changelog.md
+
+# Extra CSS and JS
+extra_css:
+  - stylesheets/extra.css
+  - stylesheets/termynal.css
+
+extra_javascript:
+  - javascripts/extra.js
+  - javascripts/termynal.js
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js

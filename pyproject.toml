@@ -1,0 +1,315 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genesis-cli"
+version = "1.0.0"
+description = "Interfaz de línea de comandos para Genesis Engine"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Genesis Team", email = "team@genesis.dev"}
+]
+maintainers = [
+    {name = "Genesis Team", email = "team@genesis.dev"}
+]
+keywords = [
+    "genesis",
+    "cli",
+    "code-generation",
+    "ai-agents",
+    "full-stack",
+    "development",
+    "automation"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Software Distribution",
+    "Topic :: Utilities"
+]
+requires-python = ">=3.8"
+
+# DOCTRINA: Solo dependencias para interfaz de usuario
+dependencies = [
+    "genesis-core>=1.0.0",  # Solo usamos genesis-core como interfaz
+    "typer>=0.9.0",        # CLI framework
+    "rich>=13.0.0",        # Rich text y UI
+    "click>=8.0.0",        # CLI utilities
+    "pathlib-abc>=0.1.0",  # Path utilities
+    "tomli>=2.0.0; python_version < '3.11'",  # TOML support
+    "tomli-w>=1.0.0",      # TOML writing
+]
+
+[project.optional-dependencies]
+# Dependencias de desarrollo
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.10.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+    "tox>=4.0.0"
+]
+
+# Dependencias de testing
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.10.0",
+    "pytest-asyncio>=0.21.0",
+    "coverage>=7.0.0"
+]
+
+# Dependencias para documentación
+docs = [
+    "mkdocs>=1.4.0",
+    "mkdocs-material>=9.0.0",
+    "mkdocs-click>=0.8.0",
+    "mkdocstrings>=0.20.0"
+]
+
+# Dependencias para linting
+lint = [
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+    "bandit>=1.7.0"
+]
+
+# Todas las dependencias de desarrollo
+all = [
+    "genesis-cli[dev,test,docs,lint]"
+]
+
+[project.urls]
+Homepage = "https://github.com/genesis-engine/genesis-cli"
+Repository = "https://github.com/genesis-engine/genesis-cli"
+Documentation = "https://docs.genesis-engine.dev/cli"
+Issues = "https://github.com/genesis-engine/genesis-cli/issues"
+Changelog = "https://github.com/genesis-engine/genesis-cli/blob/main/CHANGELOG.md"
+
+[project.scripts]
+# DOCTRINA: Única interfaz de usuario del ecosistema
+genesis = "genesis_cli.main:main_entry"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["genesis_cli*"]
+exclude = ["tests*", "docs*", "examples*"]
+
+[tool.setuptools.package-data]
+genesis_cli = ["py.typed"]
+
+# Configuración de Black (code formatting)
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+# Configuración de isort (import sorting)
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["genesis_cli"]
+known_third_party = ["typer", "rich", "click", "genesis_core"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+# Configuración de MyPy (type checking)
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = [
+    "genesis_core.*",
+    "typer.*",
+    "rich.*",
+    "click.*"
+]
+ignore_missing_imports = true
+
+# Configuración de pytest
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--verbose",
+    "--cov=genesis_cli",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+    "--cov-fail-under=80",
+    "--strict-markers",
+    "--disable-warnings"
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "cli: marks tests as CLI tests",
+    "ui: marks tests as UI tests"
+]
+asyncio_mode = "auto"
+
+# Configuración de coverage
+[tool.coverage.run]
+source = ["genesis_cli"]
+omit = [
+    "tests/*",
+    "*/tests/*",
+    "*/test_*",
+    "*/conftest.py",
+    "*/__pycache__/*",
+    "*/.*",
+    "setup.py"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod"
+]
+ignore_errors = true
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+# Configuración de bandit (security linting)
+[tool.bandit]
+exclude_dirs = ["tests", "*/tests"]
+skips = ["B101", "B601"]
+
+# Configuración de flake8
+[tool.flake8]
+max-line-length = 88
+extend-ignore = [
+    "E203",  # whitespace before ':'
+    "E501",  # line too long
+    "W503",  # line break before binary operator
+    "W504",  # line break after binary operator
+]
+exclude = [
+    ".git",
+    "__pycache__",
+    "docs/source/conf.py",
+    "old",
+    "build",
+    "dist",
+    ".tox",
+    ".venv",
+    "venv",
+    ".pytest_cache",
+    ".mypy_cache"
+]
+per-file-ignores = [
+    "__init__.py:F401",
+    "tests/*:F401,F811"
+]
+
+# Configuración de tox
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py38,py39,py310,py311,py312,lint,type
+isolated_build = True
+
+[testenv]
+deps = 
+    pytest
+    pytest-cov
+    pytest-mock
+    pytest-asyncio
+commands = pytest {posargs}
+
+[testenv:lint]
+deps = 
+    black
+    isort
+    flake8
+    bandit
+commands = 
+    black --check --diff .
+    isort --check-only --diff .
+    flake8 .
+    bandit -r genesis_cli/
+
+[testenv:type]
+deps = mypy
+commands = mypy genesis_cli/
+
+[testenv:format]
+deps = 
+    black
+    isort
+commands = 
+    black .
+    isort .
+
+[testenv:docs]
+deps = 
+    mkdocs
+    mkdocs-material
+    mkdocs-click
+    mkdocstrings
+commands = mkdocs build
+"""

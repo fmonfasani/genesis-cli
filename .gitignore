@@ -1,0 +1,227 @@
+# Genesis CLI .gitignore
+# DOCTRINA: Solo archivos relevantes para interfaz de usuario
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Genesis CLI specific
+# Archivos de configuración local
+.genesis-cli/
+
+# Logs de desarrollo
+*.log
+logs/
+
+# Archivos temporales de tests
+test_projects/
+temp_projects/
+.test_*
+
+# Archivos de backup
+*.bak
+*.backup
+*_backup_*
+
+# Archivos de profiling
+*.prof
+*.profile
+
+# Archivos de desarrollo local
+.local/
+.cache/
+
+# Archivos de configuración de desarrollo
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Archivos de documentación generada automáticamente
+docs/generated/
+docs/api/
+
+# Archivos de release
+release/
+build/
+dist/
+
+# Archivos de benchmark
+benchmark_results/
+performance_logs/
+
+# Archivos de debugging
+debug/
+debug_output/
+*.debug
+
+# Archivos de configuración de editor
+.editorconfig.local
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# Archivos de configuración de linting
+.pylintrc.local
+.flake8.local
+.mypy.ini.local
+
+# Archivos de configuración de testing
+.pytest_cache/
+.coverage.*
+htmlcov/
+test-reports/
+
+# Archivos específicos de desarrollo
+TODO.md
+NOTES.md
+DEVELOPMENT.md
+.scratch/
+
+# Archivos de configuración de CI/CD local
+.github/workflows/local/
+.gitlab-ci.local.yml
+
+# Archivos de configuración de Docker local
+docker-compose.override.yml
+.dockerignore.local
+
+# Archivos de configuración de dependencias locales
+requirements-local.txt
+requirements-dev.txt
+poetry.lock.local
+
+# Archivos de configuración de pre-commit locales
+.pre-commit-config.local.yaml
+
+# Archivos temporales de CLI
+.genesis_cli_temp/
+.genesis_cli_cache/
+.genesis_cli_sessions/
+
+# Archivos de configuración de usuario
+user_config.json
+local_config.json
+dev_config.json
